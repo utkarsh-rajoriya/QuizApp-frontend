@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-// A simple loading spinner component
+
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center p-20">
     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-600"></div>
@@ -9,7 +9,6 @@ const LoadingSpinner = () => (
   </div>
 );
 
-// Icon for correct/incorrect answers on the results page
 const FeedbackIcon = ({ isCorrect }) =>
   isCorrect ? (
     <svg

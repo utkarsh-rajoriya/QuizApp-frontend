@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import { FaLayerGroup, FaQuestionCircle, FaCheckCircle, FaTachometerAlt } from 'react-icons/fa'; // Added FaTachometerAlt
 import { motion } from 'framer-motion';
-import RoboMsg from "../components/RoboMsg"; // ⬅️ Adjust path if needed
+import RoboMsg from "../components/RoboMsg";
 
 const CreateQuestion = () => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;

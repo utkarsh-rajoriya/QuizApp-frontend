@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// A simple loading spinner component to display while fetching data
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center p-10">
     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
@@ -15,7 +14,7 @@ const Content = () => {
   const navigate = useNavigate(); // 2. Initialize navigate
 
   useEffect(() => {
-    const baseUrl = import.meta.env.VITE_API_BASE_URL; 
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
     const fetchData = async () => {
       setLoading(true);
       setError(null);
@@ -26,7 +25,6 @@ const Content = () => {
         }
         const data = await response.json();
         setQuiz(data);
-        console.log("Content data:", data);
       } catch (error) {
         console.error("Error fetching content:", error);
         setError("Failed to load quizzes. Please try again later.");
@@ -35,7 +33,7 @@ const Content = () => {
       }
     };
 
-     fetchData();
+    fetchData();
   }, []);
 
   const renderContent = () => {
@@ -61,9 +59,7 @@ const Content = () => {
         className="p-4 mb-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 flex items-center justify-between"
       >
         <div>
-          <h3 className="text-lg font-semibold text-gray-800">
-            {item.title}
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
           <p className="text-sm text-gray-500 mt-1">By: {item.author}</p>
         </div>
         {/* 3. Add onClick handler to the button */}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import roboWelcome from "../assets/RoboHi.png";
 import { motion } from "motion/react"
 
-const RoboMsg = ({ msg, type="none" , delay}) => {
+const RoboMsg = ({ msg , delay}) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {

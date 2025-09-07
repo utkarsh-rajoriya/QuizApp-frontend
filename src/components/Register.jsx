@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 
 const Register = (props) => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
-  const localUrl = "http://localhost:8080";
   const [showForget, setShowForget] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,24 +23,30 @@ const Register = (props) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${baseUrl}/api/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userinfo),
-    });
+    try {
+      const response = await fetch(`${baseUrl}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userinfo),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok || !data.id) {
-      alert("Invalid credentials. Please try again.");
-      return;
+      if (!response.ok || data.message !== "success") {
+        alert(data.message || "Login failed. Please try again.");
+        return;
+      }
+
+      // success
+      login(data.name, data.email);
+      setUserInfo({ name: "", email: "", password: "" });
+      setConfirmPassword("");
+    } catch (error) {
+      alert("Something went wrong!");
+      console.error(error);
     }
-
-    login(data.name, data.email);
-    setUserInfo({ name: "", email: "", password: "" });
-    setConfirmPassword("");
   };
 
   const handleSignup = async (e) => {
@@ -54,7 +59,7 @@ const Register = (props) => {
 
     setLoading(true);
     try {
-      const response = await fetch(`${baseUrl}/api/signup` , {
+      const response = await fetch(`${baseUrl}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,20 +68,14 @@ const Register = (props) => {
       });
 
       const data = await response.json();
-      console.log(data);
-      if(data.email == "notFound"){
-        alert("Signup failed. Email not found");
-        setUserInfo({ name: "", email: "", password: "" });
-        setConfirmPassword("");
-        return;
-      }
-      if (!response.ok || !data.id) {
-        alert("Signup failed. User already exist with this email.");
+      if (!response.ok || data.message !== "success") {
+        alert(data.message || "Signup failed.");
         setUserInfo({ name: "", email: "", password: "" });
         setConfirmPassword("");
         return;
       }
 
+      // success
       login(data.name, data.email);
       setUserInfo({ name: "", email: "", password: "" });
       setConfirmPassword("");
@@ -98,7 +97,7 @@ const Register = (props) => {
       const response = await fetch(`${baseUrl}//api/forgot`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify( {email} ),
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();

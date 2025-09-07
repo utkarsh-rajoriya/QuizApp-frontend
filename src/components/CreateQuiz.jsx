@@ -6,7 +6,6 @@ import RoboMsg from "../components/RoboMsg";
 
 const CreateQuiz = () => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
-  const localUrl = "http://localhost:8080";
   const [title, setTitle] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedQuestions, setSelectedQuestions] = useState([]);

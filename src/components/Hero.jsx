@@ -38,7 +38,7 @@ const Hero = () => {
   }, []);
 
   const scorePercentage =
-    performance.played > 0 ? (performance.score  / performance.played) * 25 : 0;
+    performance.played > 0 ? (performance.score / performance.played) * 25 : 0;
 
   return (
     <div className="relative bg-[#19213a] min-h-screen w-full font-poppins overflow-hidden">
