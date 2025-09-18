@@ -65,7 +65,6 @@ const ViewQuiz = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log("Fetched quiz is: ", data);
         setQuizData(data);
       } catch (error) {
         console.error("Error fetching quiz data:", error);
